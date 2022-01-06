@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #0093fc;
+}
+
+section{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    width: 98%;
+    height: 98%;
+    max-width: 800px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+
+
+section .Pergunta{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.formulario input{
+    margin: 10px;
+    cursor: pointer;
+}
+
+hr{
+    margin-top: 20px;
+}
