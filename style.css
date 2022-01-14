@@ -8,6 +8,10 @@ body{
     background-color: #0093fc;
 }
 
+.none{
+    display: none;
+}
+
 section{
     position: absolute;
     left: 50%;
@@ -24,7 +28,108 @@ section{
     text-align: center;
 }
 
+/*Cutomização*/
 
+input[name=Tema]{
+    padding: 5px;
+    margin: 5px;
+    width: 74%;
+    font-size: 30px;
+    border: none;
+    border-bottom: 1px black solid;
+}
+
+.addQuestao{
+    background-color: rgb(126, 221, 31);
+    color: white;
+    padding: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.formAddQuestao{
+    text-align: left;
+}
+
+input[name=enunciado]{
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+input[name=numeroDeAlternativas]{
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 30%;
+    font-size: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.alternativas button{
+    background-color: #0093fc;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.addAlternativa{
+    background-color: #0093fc;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+input[name=alternativa]{
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 30%;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+input[name=certa-errada]{
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 50px;
+    font-size: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.temaPrevia{
+    flex: 1;
+    text-align: left;
+}
+
+.previa div{
+    display: flex;
+    width: 100%;
+}
+
+.previa div{
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    margin: 20px 0px;
+    max-width: 850px;
+}
+
+/*Questionario*/
 
 section .Pergunta{
     margin-top: 20px;
