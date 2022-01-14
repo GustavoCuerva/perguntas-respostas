@@ -2,7 +2,7 @@
 var formAddQuestao = document.querySelector(".formAddQuestao");
 var boxPerguntas = document.querySelector('.box');
 var elementos = document.querySelectorAll("[type=radio]");
-
+var iniciar = document.querySelector('.iniciar');
 
 document.querySelector(".addQuestao").addEventListener("click", () => {
   if (formAddQuestao.classList.contains("none")) {
@@ -116,15 +116,28 @@ function salvarQuestao(){
         ce[i].value = '';
       });
 
+      if (iniciar.classList.contains('none')) {
+        iniciar.classList.remove('none');
+      }
+
       elementos = document.querySelectorAll("[type=radio]");
     }
 
 }
 
     //SALVAR E INICIAR
-/*
+
+    iniciar.addEventListener('click', ()=>{
+
+      if (document.querySelector('[name=Tema]').value != '') {
+        document.querySelector('.tema').innerHTML = document.querySelector('[name=Tema]').value;
+      }
+
+      document.querySelector('.criar').classList.add('none');
+
       document.querySelector('.questionario').classList.remove('none');
-      respostas();*/
+      respostas();
+    })
 
 /*SELECIONANDO AS RESPOSTAS*/
 

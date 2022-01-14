@@ -28,6 +28,20 @@ section{
     text-align: center;
 }
 
+.iniciar{
+  position: fixed;
+  top: 92%;
+  left: 83%;
+  transform: translate(-10%, -5%);
+  background-color: #0093fc;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 /*Cutomização*/
 
 input[name=Tema]{
