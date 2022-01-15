@@ -1,9 +1,11 @@
 /*Adicionar uma questão*/
 var formAddQuestao = document.querySelector(".formAddQuestao");
-var boxPerguntas = document.querySelector('.box');
+var boxPerguntas = document.querySelector(".box");
 var elementos = document.querySelectorAll("[type=radio]");
-var iniciar = document.querySelector('.iniciar');
+var iniciar = document.querySelector(".iniciar");
+var cont2 = 1;
 
+//Liberando opcoes de alternativas
 document.querySelector(".addQuestao").addEventListener("click", () => {
   if (formAddQuestao.classList.contains("none")) {
     formAddQuestao.classList.remove("none");
@@ -20,16 +22,12 @@ document.querySelector(".addAlternativa").addEventListener("click", () => {
   if (numAlt > 5 || numAlt < 2) {
     alert("Selecione no máximo 5 alternativas e no minimo 2");
   } else {
-
-    document.querySelector('.quantAlt').classList.add('none');
+    document.querySelector(".quantAlt").classList.add("none");
 
     alternativas.innerHTML =
       '<h2 style="color:red; font-size: 15px;">Digite 0 para resposta incorreta e 1 para a resposta correta. SÓ SELECIONE UMA RESPOSTA CORRETA!</h2>';
 
     for (let i = 1; i <= numAlt; i++) {
-      /*    <input type="text" name="alternativa" placeholder="Digite a alternativa...">
-            <input type="number" name="certa-errada">
-            <button class="salvarQuestao">Salvar</button>*/
 
       alternativas.innerHTML += `<input type="text" name="alternativa" placeholder="Digite a alternativa...">
     <input type="number" name="certa-errada">
@@ -41,130 +39,147 @@ document.querySelector(".addAlternativa").addEventListener("click", () => {
   }
 });
 
-
 //salvar alternativas
-function salvarQuestao(){
-    let enunciado = document.querySelector('[name=enunciado]');
-    let opc = document.querySelectorAll('[name=alternativa]');
-    let ce = document.querySelectorAll('[name=certa-errada]');
-    let cont = 0;
-    let confirmSave = 0;
+function salvarQuestao() {
+  let enunciado = document.querySelector("[name=enunciado]");
+  let opc = document.querySelectorAll("[name=alternativa]");
+  let ce = document.querySelectorAll("[name=certa-errada]");
+  let cont = 0;
+  let confirmSave = 0;
 
-    if (enunciado.value=='') {
-      alert('Digite o Enunciado');
-      cont++;
-    }
+  if (enunciado.value == "") {
+    alert("Digite o Enunciado");
+    confirmSave++;
+  }
 
-    opc.forEach((x,i)=>{
-      
-      let j = parseInt(ce[i].value);
+  opc.forEach((x, i) => {
+    let j = parseInt(ce[i].value);
 
-      if (opc[i].value == '' || ce[i].value=='') {
-        alert('Preencha todos os campos | Campo '+(i+1)+' não preenchido');
-        confirmSave++;
-      }else if (j < 0 || j > 1) {
-        alert('Preencha corretamente o campo '+(i+1));
-        confirmSave++;
-      }
-      if(j==1){
-        cont++;
-        if (cont>1) {
-          alert('Selecione apenas uma resposta correta');
-          confirmSave++;
-        }
-      }
-    });
-
-    if (cont<1) {
-      alert('Selecione no minimo uma resposta correta');
+    if (opc[i].value == "" || ce[i].value == "") {
+      alert("Preencha todos os campos | Campo " + (i + 1) + " não preenchido");
+      confirmSave++;
+    } else if (j < 0 || j > 1) {
+      alert("Preencha corretamente o campo " + (i + 1));
       confirmSave++;
     }
+    if (j == 1) {
+      cont++;
+      if (cont > 1) {
+        alert("Selecione apenas uma resposta correta");
+        confirmSave++;
+      }
+    }
+  });
 
-    //Se for aprovado em todas as verificações prosseguir
-    if (confirmSave==0) {
+  if (cont < 1) {
+    alert("Selecione no minimo uma resposta correta");
+    confirmSave++;
+  }
 
-        boxPerguntas.innerHTML += `<div class="Pergunta">
+  //Se for aprovado em todas as verificações prosseguir
+  if (confirmSave == 0) {
+    let continuacao = '';
+    let j = ce.length - 1;
+
+    for (let i = 0; i < ce.length; i++) {
+      continuacao += `<div class="resposta">
+                <span>${opc[i].value}</span>
+                <input type="radio" name="${cont2}" value="${ce[i].value}" />
+              </div>`;
+
+      if (i == j) {
+        continuacao += `</form>
+            <hr />`;
+      }
+    }
+
+    boxPerguntas.innerHTML += `
+        <div class="Pergunta">
       <h2>${enunciado.value}</h2>
     </div>
 
-    <form class="formulario">`;
-      for (let i = 0; i < ce.length; i++) {
-        boxPerguntas.innerHTML += `<div class="resposta">
-        <span>${opc[i].value}</span>
-        <input type="radio" name="Opcao1" value="${ce[i].value}" />
-      </div>`;
-      }
+    <form class="formulario">`+continuacao;
 
-      boxPerguntas.innerHTML += `</form>
-      <hr />`
+    
 
-      document.querySelector('.previa').innerHTML += `<div>
+    document.querySelector(".previa").innerHTML += `<div>
       <h2 class="temaPrevia">${enunciado.value}</h2>
       <span>${opc.length}</span>
-      </div>`
+      </div>`;
 
-      formAddQuestao.classList.add("none");
+    formAddQuestao.classList.add("none");
 
-      document.querySelector('.quantAlt').classList.remove('none');
-      
-      alternativas.innerHTML = '';
+    document.querySelector(".quantAlt").classList.remove("none");
 
-      enunciado.value = '';
+    alternativas.innerHTML = "";
 
-      opc.forEach((x,i)=>{
-        x.value = '';
-        ce[i].value = '';
-      });
+    enunciado.value = "";
 
-      if (iniciar.classList.contains('none')) {
-        iniciar.classList.remove('none');
-      }
+    opc.forEach((x, i) => {
+      x.value = "";
+      ce[i].value = "";
+    });
 
-      elementos = document.querySelectorAll("[type=radio]");
+    if (iniciar.classList.contains("none")) {
+      iniciar.classList.remove("none");
     }
 
+    elementos = document.querySelectorAll("[type=radio]");
+
+    cont2++;
+  }
 }
 
-    //SALVAR E INICIAR
+//SALVAR E INICIAR
 
-    iniciar.addEventListener('click', ()=>{
+iniciar.addEventListener("click", () => {
+  if (document.querySelector("[name=Tema]").value != "") {
+    document.querySelector(".tema").innerHTML =
+      document.querySelector("[name=Tema]").value;
+  }
 
-      if (document.querySelector('[name=Tema]').value != '') {
-        document.querySelector('.tema').innerHTML = document.querySelector('[name=Tema]').value;
-      }
+  document.querySelector(".criar").classList.add("none");
 
-      document.querySelector('.criar').classList.add('none');
-
-      document.querySelector('.questionario').classList.remove('none');
-      respostas();
-    })
+  document.querySelector(".questionario").classList.remove("none");
+  respostas();
+  /*
+      document.querySelector('body').innerHTML += '<script src="verificacao.js"></script>';*/
+});
 
 /*SELECIONANDO AS RESPOSTAS*/
+//ARRUMAR O DESMARCAR TODOS
+function respostas() {
+  elementos.forEach((x) => {
+    x.addEventListener("change", (e) => {
+      for (let i = 1; i < cont2; i++) {
+        if (x.name == i) {
+          //console.log(i+"  "+ x.name);
+        }
+      }
 
-function respostas(){
-elementos.forEach((x, i) => {
-  x.addEventListener("change", (e) => {
-    let marcado = e.target.value;
+      //let classDiv = i.toString();
 
-    let el = (e.target.previousElementSibling.style.color = "white");
+      let marcado = e.target.value;
 
-    let parentNode = e.target.parentNode;
+      let el = (e.target.previousElementSibling.style.color = "white");
 
-    if (marcado == "1") {
-      parentNode.style.backgroundColor = "green";
-    } else if (marcado == "0") {
-      parentNode.style.backgroundColor = "red";
+      let parentNode = e.target.parentNode;
 
-      let correta = parentNode.parentNode.querySelector("[value='1']");
+      if (marcado == "1") {
+        parentNode.style.backgroundColor = "green";
+      } else if (marcado == "0") {
+        parentNode.style.backgroundColor = "red";
 
-      correta.parentNode.style.backgroundColor = "green";
-    }
+        let correta = parentNode.parentNode.querySelector(`[value='1']`);
 
-    let els = parentNode.parentNode.querySelectorAll("[type=radio]");
+        correta.parentNode.style.backgroundColor = "green";
+      }
 
-    for (var n = 0; n < els.length; n++) {
-      els[n].disabled = true;
-    }
+      let els = parentNode.parentNode.querySelectorAll(`[type=radio]`);
+
+      for (var n = 0; n < els.length; n++) {
+        els[n].disabled = true;
+      }
+    });
   });
-});
 }
